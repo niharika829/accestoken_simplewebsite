@@ -1,18 +1,21 @@
-npm init to create package.json file
+* npm init to create package.json file
 
-npm i express jsonwebtoken dotenv
+* npm i express jsonwebtoken dotenv
 
-create an empty .env file by self
+* create an empty .env file by self
 
-install a development dependebcy :- npm i --save-dev nodemon
+* install a development dependebcy :- npm i --save-dev nodemon
 
-create a index.js file with a simple console.log statement , go to package.json under scripts write the running command
+* create a index.js file with a simple console.log statement , go to package.json under scripts write the running command
 
-test if the server is running by typing command on the terminal ex:- npm run your_command
+* test if the server is running by typing command on the terminal ex:- npm run your_command
 
-start the server in the index.js, add a basic GET route
+* start the server in the index.js, add a basic GET route
 
-in order to generate a jwt secret (which is merely a unique string) , open a terminal and type node to open the node editor, then type 
+* in order to generate a jwt secret (which is merely a unique string) , open a terminal and type node to open the node editor, then type 
 require('crypto').randomBytes(64).toString('hex') this will provide you a unique string everytime you run it , just copy the string
 and paste in under ACCESS_TOKEN_SECRET residing in .env file , take another unique string (different from the first one) and add it 
 under REFRESH_TOKEN_SECRET
+
+* while sending authorization token send it in this form ===> 
+Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibmloYXJpa2EiLCJpYXQiOjE2MzY2MzA5OTV9.Od3FKXtUfi6pTfGB8Fje1AzLDRW6lSNivtYaUtXgPK0
