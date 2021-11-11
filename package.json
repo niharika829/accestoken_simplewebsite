@@ -1,0 +1,19 @@
+{
+  "name": "accesstoken",
+  "version": "1.0.0",
+  "description": "node js access token practice",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niharika829/accestoken_simplewebsite.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/niharika829/accestoken_simplewebsite/issues"
+  },
+  "homepage": "https://github.com/niharika829/accestoken_simplewebsite#readme"
+}
