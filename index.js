@@ -9,7 +9,8 @@ const postData = require("./data/posts")
 
 // we need to have a app variable to setput the express server
 const app = express()
-
+let accessTokenArr = [];
+let refreshTokenArr = []
 // this will allow us to convert the chunks into json objects which are being fetch from the payload -> body while an API request
 app.use(express.json())
 
@@ -21,19 +22,26 @@ app.get('/posts', authenticateToken, (req, res) => {
 app.post("/login", (req, res) => {
     const username = req.body.username;
     const user = { name: username }
-
     const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '40s' })
     const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
+    accessTokenArr.push(accessToken);
+    refreshTokenArr.push(refreshToken)
     res.json({ message: "success", data: { accessToken, refreshToken } })
+})
+
+app.delete("/logout", (req, res) => {
+    if (accessTokenArr.includes(req.body.accessToken)) accessTokenArr.filter((uniqueToken) => uniqueToken !== req.body.accessToken)
+    if (refreshTokenArr.includes(req.body.refreshToken)) refreshTokenArr.filter((uniqueToken) => uniqueToken !== req.body.refreshToken)
+    res.sendStatus(204)
 })
 app.post("/token/refresh", (req, res) => {
     const refreshToken = req.body.token;
-    console.log(`req.body.token`, req.body.token)
-    if (refreshToken === null) return res.sendStatus(403)
+    if (refreshToken === null || !refreshTokenArr.includes(refreshToken)) return res.sendStatus(403)
     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
         // forbidden
         if (err) return res.sendStatus("403")
         const accessToken = jwt.sign({ name: user.name }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '40s' })
+        accessTokenArr.push(accessToken);
         res.json({ message: "success", data: { accessToken, refreshToken } })
     })
 })
@@ -46,11 +54,14 @@ function authenticateToken(req, res, next) {
     const authToken = req.headers['authorization'];
 
     const token = authToken && authToken.split(" ")[1]
-    if (token === null) return res.sendStatus(401)
+    if (token === null || !accessTokenArr.includes(token)) return res.sendStatus(401)
 
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
         // forbidden
-        if (err) return res.sendStatus("403")
+        if (err) {
+            if (accessTokenArr.includes(token)) accessTokenArr.filter((uniqueToken) => uniqueToken !== token)
+            return res.sendStatus("403")
+        }
         // not res, it will be a added to the payload which was passed by the api call
         req.user = user;
 
