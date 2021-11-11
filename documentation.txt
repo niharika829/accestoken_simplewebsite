@@ -11,3 +11,8 @@ create a index.js file with a simple console.log statement , go to package.json 
 test if the server is running by typing command on the terminal ex:- npm run your_command
 
 start the server in the index.js, add a basic GET route
+
+in order to generate a jwt secret (which is merely a unique string) , open a terminal and type node to open the node editor, then type 
+require('crypto').randomBytes(64).toString('hex') this will provide you a unique string everytime you run it , just copy the string
+and paste in under ACCESS_TOKEN_SECRET residing in .env file , take another unique string (different from the first one) and add it 
+under REFRESH_TOKEN_SECRET
