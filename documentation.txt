@@ -1,0 +1,11 @@
+npm init to create package.json file
+
+npm i express jsonwebtoken dotenv
+
+create an empty .env file by self
+
+install a development dependebcy :- npm i --save-dev nodemon
+
+create a index.js file with a simple console.log statement , go to package.json under scripts write the running command
+
+test if the server is running by typing command on the terminal ex:- npm run your_command

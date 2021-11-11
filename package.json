@@ -4,6 +4,7 @@
   "description": "node js access token practice",
   "main": "index.js",
   "scripts": {
+    "server": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,13 @@
   "bugs": {
     "url": "https://github.com/niharika829/accestoken_simplewebsite/issues"
   },
-  "homepage": "https://github.com/niharika829/accestoken_simplewebsite#readme"
+  "homepage": "https://github.com/niharika829/accestoken_simplewebsite#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
 }
