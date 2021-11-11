@@ -9,3 +9,5 @@ install a development dependebcy :- npm i --save-dev nodemon
 create a index.js file with a simple console.log statement , go to package.json under scripts write the running command
 
 test if the server is running by typing command on the terminal ex:- npm run your_command
+
+start the server in the index.js, add a basic GET route
